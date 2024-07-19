@@ -7,6 +7,10 @@ generator client {
   provider = "prisma-client-js"
 }
 
+enum UserRole {
+  EDITOR
+}
+
 model User {
   id            String          @id @default(cuid())
   name          String?
@@ -17,6 +21,7 @@ model User {
   sessions      Session[]
   // Optional for WebAuthn support
   Authenticator Authenticator[]
+  role          UserRole        @default(EDITOR)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

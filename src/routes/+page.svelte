@@ -4,11 +4,9 @@
     import { page } from "$app/stores";
 
     onMount(() => {
-        if ($page.data.session) {
-            fetch('/api/hello', {
-                method: "GET",
-            });
-        }
+        fetch('/api/hello', {
+            method: "GET",
+        });
     });
 </script>
 
