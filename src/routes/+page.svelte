@@ -3,7 +3,13 @@
     import { signIn, signOut } from "@auth/sveltekit/client";
     import { page } from "$app/stores";
 
-    onMount(() => {});
+    onMount(() => {
+        if ($page.data.session) {
+            fetch('/api/hello', {
+                method: "GET",
+            });
+        }
+    });
 </script>
 
 {#if $page.data.session }
