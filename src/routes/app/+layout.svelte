@@ -1,13 +1,8 @@
 <script lang="ts">
-    import { page } from "$app/stores";
-    import { redirect } from "@sveltejs/kit";
-    import { onMount } from "svelte";
-
-    onMount(() => {
-        if (!$page.data.session) {
-            redirect(307, "/");
-        }
-    })
+    import TopNav from "$lib/frontend/components/layout/TopNav.svelte";
 </script>
 
-<slot />
+<section>
+    <TopNav />
+    <slot />
+</section>

@@ -2,4 +2,6 @@
     import "../app.css";
 </script>
 
-<slot />
+<main class="flex h-dvh w-full p-4 bg-gray-100">
+    <slot />
+</main>
