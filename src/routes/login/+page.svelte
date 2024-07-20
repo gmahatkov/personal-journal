@@ -3,6 +3,7 @@
     import { page } from "$app/stores";
     import {onMount} from "svelte";
     import {goto} from "$app/navigation";
+    import { Card, Button } from "flowbite-svelte";
 
     onMount(() => {
         if ($page.data.session) {
@@ -12,11 +13,11 @@
 </script>
 
 {#if !$page.data.session }
-    <div class="w-1/3 h-1/3 p-2 border-2 border-gray-300 rounded flex m-auto">
-        <button class="py-1 px-3 bg-blue-800 text-white rounded w-auto h-auto m-auto text-2xl"
-                on:click={() => signIn("google")}
-        >
+    <Card class="h-auto m-auto">
+        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Login</h5>
+        <p class="text-gray-600 mb-4">Please sign in to continue.</p>
+        <Button on:click={() => signIn("google")} outline color="light">
             Sign in with Google
-        </button>
-    </div>
+        </Button>
+    </Card>
 {/if}

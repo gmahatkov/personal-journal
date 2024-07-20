@@ -43,7 +43,12 @@
 		"@auth/core": "^0.34.1",
 		"@auth/prisma-adapter": "^2.4.1",
 		"@auth/sveltekit": "^1.4.1",
+		"@popperjs/core": "^2.11.8",
 		"@prisma/client": "^5.17.0",
-		"@sveltejs/adapter-node": "^5.2.0"
+		"@sveltejs/adapter-node": "^5.2.0",
+		"flowbite": "^2.4.1",
+		"flowbite-svelte": "^0.46.15",
+		"flowbite-svelte-icons": "^1.6.1",
+		"tailwind-merge": "^2.4.0"
 	}
 }

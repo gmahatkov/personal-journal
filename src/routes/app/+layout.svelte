@@ -1,8 +1,24 @@
 <script lang="ts">
-    import TopNav from "$lib/frontend/components/layout/TopNav.svelte";
+    import AppTopNav from "$lib/frontend/components/layout/AppTopNav.svelte";
+    import AppSideNav from "$lib/frontend/components/layout/AppSideNav.svelte";
+    import { Footer, Card, Heading } from "flowbite-svelte";
 </script>
 
-<section>
-    <TopNav />
-    <slot />
-</section>
+<div class="grid auto-rows-min grid-cols-12 grid-rows-layout w-full h-full">
+    <header class="col-span-12">
+        <AppTopNav />
+    </header>
+    <section class="col-span-2 overflow-scroll p-4">
+        <AppSideNav />
+    </section>
+    <section class="col-span-10 overflow-scroll p-4">
+        <slot />
+    </section>
+    <Footer class="col-span-12 p-4">
+        <div class="grid grid-cols-12">
+            <div class="col-span-12 text-center">
+                <p class="text-gray-500 text-sm">&nbsp;---&nbsp;</p>
+            </div>
+        </div>
+    </Footer>
+</div>
