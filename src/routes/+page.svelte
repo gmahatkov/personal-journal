@@ -5,7 +5,7 @@
 
     onMount(() => {
         if (!$page.data.session) {
-            goto("/login");
+            goto("/signin");
         } else {
             goto("/app/dashboard");
         }

@@ -1,7 +1,7 @@
 <script lang="ts">
     import AppTopNav from "$lib/frontend/components/layout/AppTopNav.svelte";
     import AppSideNav from "$lib/frontend/components/layout/AppSideNav.svelte";
-    import { Footer, Card, Heading } from "flowbite-svelte";
+    import { Footer } from "flowbite-svelte";
 </script>
 
 <div class="grid auto-rows-min grid-cols-12 grid-rows-layout w-full h-full">
