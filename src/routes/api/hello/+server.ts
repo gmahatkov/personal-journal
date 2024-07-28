@@ -6,7 +6,7 @@ const { fallback, GET } = useAPIRoutes({
         GET: async (event: RequestEvent) =>
         {
             const message = event.url.searchParams.get("message") ?? "Hello from the server!";
-            return json({message});
+            return json({ message });
         },
     },
     protectedRoutes: [
