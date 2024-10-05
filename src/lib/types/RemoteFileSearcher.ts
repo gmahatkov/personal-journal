@@ -1,11 +1,13 @@
 import type {Account} from "@prisma/client";
 
 export interface RemoteFileSearchResultItem {
+    id: string;
     url: string;
     name: string;
     dateModified?: string;
     dateCreated?: string;
     mimeType?: string;
+    thumbnailUrl?: string;
 }
 export interface RemoteFileSearchResult {
     items: Array<RemoteFileSearchResultItem>;
@@ -26,6 +28,7 @@ export type RemoteFileSearcherImageAsBufferResponse = {
 };
 export interface IRemoteFileSearcherImageAsBuffer {
     getImage(id: string): Promise<RemoteFileSearcherImageAsBufferResponse>;
+    getThumbnail(id: string): Promise<RemoteFileSearcherImageAsBufferResponse>;
 }
 
 export interface IRemoteFileSearcherConstructor

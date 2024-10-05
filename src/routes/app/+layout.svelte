@@ -8,9 +8,7 @@
     <header class="col-span-12">
         <AppTopNav />
     </header>
-    <section class="col-span-2 overflow-scroll p-4">
-        <AppSideNav />
-    </section>
+    <AppSideNav className="col-span-2 overflow-scroll p-4" />
     <section class="col-span-10 overflow-scroll p-4">
         <slot />
     </section>

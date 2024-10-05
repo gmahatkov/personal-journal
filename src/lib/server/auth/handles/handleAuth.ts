@@ -9,17 +9,6 @@ import type { SvelteKitAuthConfig } from "@auth/sveltekit";
 const config: SvelteKitAuthConfig = {
     providers: [
         Google({
-            clientId: GOOGLE_CLIENT_ID,
-            clientSecret: GOOGLE_CLIENT_SECRET,
-            authorization: {
-                params: {
-                    access_type: 'offline',
-                    prompt: 'consent',
-                    scope: 'openid profile email',
-                },
-            },
-        }),
-        Google({
             id: 'google-drive',
             clientId: GOOGLE_CLIENT_ID,
             clientSecret: GOOGLE_CLIENT_SECRET,

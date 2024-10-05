@@ -20,7 +20,7 @@ const RemoteFileProviderMap: Map<
     ["onedrive", GoogleDrive],
 ]);
 
-export function useRemoteFileSearcher
+export function createRemoteFileSearcher
 <
     SearchParams extends Record<string, any>,
     ProviderName extends RemoteFileProviderName,

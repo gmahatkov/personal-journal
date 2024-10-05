@@ -24,6 +24,9 @@ export default {
             gridTemplateRows: {
                 'layout': 'auto 1fr auto',
             },
+            spacing: {
+                '200': '200px',
+            }
         },
     },
     plugins: [

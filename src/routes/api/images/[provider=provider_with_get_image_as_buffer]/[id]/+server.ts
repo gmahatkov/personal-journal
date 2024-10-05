@@ -1,6 +1,6 @@
 import { json, error} from "@sveltejs/kit";
 import { useAPIRoutes } from "$lib/server/utils/APIRoute";
-import { useRemoteFileSearcher } from "$lib/server/services/RemoteFileSearcher/useRemoteFileSearcher";
+import { createRemoteFileSearcher } from "$lib/server/services/RemoteFileSearcher/createRemoteFileSearcher";
 import type {
     IRemoteFileSearcherImageAsBuffer,
     RemoteFileProviderName,
@@ -15,10 +15,13 @@ const { fallback, GET } = useAPIRoutes({
             try {
                 const provider = event.params.provider as RemoteFileProviderRequireImageAsBufferNames;
                 const id = event.params.id as string;
+                const thumbnail = event.url.searchParams.get("thumbnail");
                 const session = await event.locals.auth();
                 const accounts = await event.locals.accounts({ session });
-                const remoteFileSearcher = useRemoteFileSearcher(provider, accounts) satisfies IRemoteFileSearcherImageAsBuffer;
-                const { buffer, mimeType} = await remoteFileSearcher.getImage(id);
+                const remoteFileSearcher = createRemoteFileSearcher(provider, accounts) satisfies IRemoteFileSearcherImageAsBuffer;
+                const { buffer, mimeType} = thumbnail
+                    ? await remoteFileSearcher.getThumbnail(thumbnail)
+                    : await remoteFileSearcher.getImage(id);
                 event.setHeaders({
                     "Content-Type": mimeType,
                     "Content-Disposition": `attachment; filename="${id}"`,

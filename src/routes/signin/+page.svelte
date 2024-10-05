@@ -37,7 +37,7 @@
             <UserSolid />
         </div>
     </SignIn>
-    <SignIn provider="google" className="sign-in-oauth">
+    <SignIn provider="google-drive" className="sign-in-oauth">
         <div slot="submitButton"
              class="sign-in-oauth_submit-button">
             <GoogleSolid class="mr-4" />
