@@ -1,8 +1,10 @@
 export function trapIntersection(
     node: HTMLElement,
     options: {
-        cb: (entries?: IntersectionObserverEntry[], node?: HTMLElement) => void,
+        cb: (entries: IntersectionObserverEntry[], node: HTMLElement, observer: IntersectionObserver) => void,
         onDestroyCb?: (observer?: IntersectionObserver) => void,
+        once?: boolean,
+        threshold?: number,
     }):
     {
         destroy(): void
@@ -10,17 +12,21 @@ export function trapIntersection(
 {
     const observerOptions: IntersectionObserverInit = {
         root: document.body,
-        threshold: 1,
+        threshold: options.threshold ?? 0,
         rootMargin: "0px",
     }
     const observer = new IntersectionObserver((entries) => {
         if (entries?.[0]?.isIntersecting === true) {
-            options.cb(entries, node);
+            options.cb(entries, node, observer);
+        }
+        if (options.once) {
+            observer.disconnect();
         }
     }, observerOptions);
     observer.observe(node);
     return {
         destroy() {
+            observer.disconnect();
             options?.onDestroyCb?.(observer);
         }
     }

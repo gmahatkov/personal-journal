@@ -9,6 +9,9 @@ export interface RemoteFileSearchResultItem {
     mimeType?: string;
     thumbnailUrl?: string;
 }
+export interface RemoteFileSearchResultItemUI extends RemoteFileSearchResultItem {
+    cachedThumbnail?: string | null;
+}
 export interface RemoteFileSearchResult {
     items: Array<RemoteFileSearchResultItem>;
     pagingParams: Record<string, any>;
