@@ -6,7 +6,7 @@
   - Add custom border widths (3px, 5px) and shadow utilities to Tailwind config
   - _Requirements: 2.1, 2.2, 2.3, 2.4, 2.5, 2.6_
 
-- [ ] 2. Implement theme management system
+- [x] 2. Implement theme management system
   - [x] 2.1 Create theme store with localStorage persistence
     - Write Svelte writable store in `src/lib/frontend/stores/theme.ts`
     - Implement system preference detection using `matchMedia('prefers-color-scheme: dark')`
@@ -26,16 +26,16 @@
     - _Requirements: 1.1, 1.5_
 
 - [ ] 3. Install and configure Storybook
-  - [ ] 3.1 Install Storybook dependencies
+  - [x] 3.1 Install Storybook dependencies
     - Install `@storybook/sveltekit`, `@storybook/addon-essentials`, `@storybook/addon-a11y`, `@storybook/addon-svelte-csf`
     - Update `package.json` with Storybook scripts
     - _Requirements: 8.1_
-  - [ ] 3.2 Configure Storybook for SvelteKit
+  - [x] 3.2 Configure Storybook for SvelteKit
     - Create `.storybook/main.ts` with SvelteKit framework configuration
     - Configure story file patterns to include `src/**/*.stories.@(js|ts|svelte)`
     - Add required addons (essentials, a11y, interactions, svelte-csf)
     - _Requirements: 8.1_
-  - [ ] 3.3 Set up theme decorator and global styles
+  - [x] 3.3 Set up theme decorator and global styles
     - Create `.storybook/preview.ts` with theme decorator
     - Import `src/app.css` to make Tailwind and design tokens available
     - Add theme toolbar control for switching between light/dark
