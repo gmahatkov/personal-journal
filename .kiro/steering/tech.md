@@ -1,12 +1,14 @@
 # Tech Stack
 
 ## Core Framework
+
 - **SvelteKit** - Full-stack framework with SSR
 - **Svelte 4** - Component framework
 - **TypeScript** - Strict mode enabled
 - **Vite** - Build tool and dev server
 
 ## Backend
+
 - **Prisma** - ORM for PostgreSQL
 - **PostgreSQL** - Primary database
 - **Auth.js (@auth/sveltekit)** - Authentication with Prisma adapter
@@ -14,11 +16,13 @@
 - **sharp** - Image processing
 
 ## Frontend
+
 - **Tailwind CSS** - Utility-first styling
 - **Flowbite Svelte** - UI component library
 - **Popper.js** - Positioning engine for tooltips/popovers
 
 ## Development Tools
+
 - **ESLint** - Linting with TypeScript and Svelte plugins
 - **Prettier** - Code formatting
 - **Playwright** - E2E testing
@@ -26,6 +30,7 @@
 - **svelte-check** - Type checking for Svelte
 
 ## Deployment
+
 - **@sveltejs/adapter-node** - Node.js production adapter
 - **Docker** - Containerization support
 
