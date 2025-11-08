@@ -7,7 +7,7 @@
   - _Requirements: 2.1, 2.2, 2.3, 2.4, 2.5, 2.6_
 
 - [ ] 2. Implement theme management system
-  - [ ] 2.1 Create theme store with localStorage persistence
+  - [x] 2.1 Create theme store with localStorage persistence
     - Write Svelte writable store in `src/lib/frontend/stores/theme.ts`
     - Implement system preference detection using `matchMedia('prefers-color-scheme: dark')`
     - Add localStorage read/write with error handling
