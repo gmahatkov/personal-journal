@@ -1,112 +1,215 @@
 # DevContainer Setup Guide
 
-This project includes a DevContainer configuration for a consistent development environment across all team members.
+This project uses VS Code DevContainers to provide a consistent development environment across all team members.
 
 ## Prerequisites
 
-- [Docker Desktop](https://www.docker.com/products/docker-desktop) installed and running
-- [Visual Studio Code](https://code.visualstudio.com/) with the [Dev Containers extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
+- **Docker Desktop**: Install from [docker.com](https://www.docker.com/products/docker-desktop)
+  - Windows: Requires WSL2
+  - macOS: Native support
+  - Linux: Native support
+- **VS Code**: Install from [code.visualstudio.com](https://code.visualstudio.com/)
+- **Dev Containers Extension**: Install from VS Code marketplace (`ms-vscode-remote.remote-containers`)
 
 ## Getting Started
 
-1. **Set up environment variables**:
-   - Copy `.env.example` to `.env` in the project root
-   - Add your Neon PostgreSQL `DATABASE_URL` to the `.env` file
-   - The devcontainer will automatically mount this file
+### 1. Clone the Repository
 
-2. **Open in DevContainer**:
-   - Open the project in VS Code
-   - Press `F1` or `Cmd/Ctrl+Shift+P` to open the command palette
-   - Select "Dev Containers: Reopen in Container"
-   - Wait for the container to build (first time takes 2-5 minutes)
+```bash
+git clone <repository-url>
+cd <project-directory>
+```
 
-3. **Verify setup**:
-   - The container will automatically run `pnpm install` and `prisma generate`
-   - All VS Code extensions will be installed automatically
-   - Ports 5173 (dev server) and 5555 (Prisma Studio) are forwarded
+### 2. Set Up Environment Variables
 
-## What's Included
+Copy the example environment file and configure it:
 
-### Development Tools
-- Node.js 20 LTS
-- pnpm 8.x package manager
-- Git
+```bash
+cp .env.example .env
+```
 
-### VS Code Extensions
-- **Svelte for VS Code** - Svelte language support
-- **ESLint** - JavaScript/TypeScript linting
-- **Prettier** - Code formatting
-- **Prisma** - Database schema support
-- **Tailwind CSS IntelliSense** - Tailwind class completion
+Edit `.env` and add your configuration:
 
-### Port Forwarding
-- **5173** - Vite development server
-- **5555** - Prisma Studio (database GUI)
+- **DATABASE_URL**: Your Neon PostgreSQL connection string (see Database Setup below)
+- **GOOGLE_CLIENT_ID** and **GOOGLE_CLIENT_SECRET**: OAuth credentials from Google Cloud Console
+- **AUTH_SECRET** and **AUTH_SALT**: Generate random secrets (see below)
 
-## Common Tasks
+Generate random secrets:
+
+```bash
+# For AUTH_SECRET
+openssl rand -base64 32
+
+# For AUTH_SALT
+openssl rand -base64 32
+```
+
+### 3. Open in DevContainer
+
+1. Open the project folder in VS Code
+2. When prompted, click "Reopen in Container" (or use Command Palette: `Dev Containers: Reopen in Container`)
+3. Wait for the container to build (first time takes 2-5 minutes)
+4. The container will automatically:
+   - Install Node.js 20 LTS
+   - Install pnpm
+   - Run `pnpm install` to install dependencies
+   - Run `prisma generate` to generate the Prisma client
+
+### 4. Verify Setup
+
+Once the container is running, open a terminal in VS Code and verify:
+
+```bash
+# Check Node.js version
+node --version  # Should show v20.x.x
+
+# Check pnpm version
+pnpm --version  # Should show 8.x.x or higher
+
+# Check database connection
+pnpm prisma studio  # Opens Prisma Studio on port 5555
+```
+
+## Database Setup (Neon)
+
+This project uses [Neon](https://neon.tech) as the PostgreSQL database provider.
+
+### Create a Neon Account and Database
+
+1. Sign up at [neon.tech](https://neon.tech)
+2. Create a new project
+3. Copy the connection string from the dashboard
+4. Add it to your `.env` file as `DATABASE_URL`
+
+### Development Workflow with Neon Branching
+
+Neon supports database branching, which is perfect for development:
+
+1. **Main Branch**: Use for production
+2. **Development Branch**: Create a branch for local development
+
+```bash
+# Create a development branch (via Neon Console or CLI)
+# Then update your .env with the development branch connection string
+```
+
+### Run Migrations
+
+```bash
+# Apply existing migrations
+pnpm prisma migrate deploy
+
+# Create a new migration (if you changed schema.prisma)
+pnpm prisma migrate dev --name your_migration_name
+```
+
+## Development Workflow
 
 ### Start Development Server
+
 ```bash
 pnpm dev
 ```
 
-### Run Prisma Studio
-```bash
-npx prisma studio
-```
+The app will be available at `http://localhost:5173` (automatically forwarded from the container).
 
-### Run Database Migrations
-```bash
-npx prisma migrate dev
-```
+### Common Commands
 
-### Run Tests
 ```bash
+# Install dependencies
+pnpm install
+
+# Run type checking
+pnpm check
+
+# Run linting
+pnpm lint
+
+# Format code
+pnpm format
+
+# Run tests
 pnpm test
+
+# Build for production
+pnpm build
+
+# Preview production build
+pnpm preview
+
+# Open Prisma Studio
+pnpm prisma studio  # Available at http://localhost:5555
 ```
+
+## Installed Extensions
+
+The devcontainer automatically installs these VS Code extensions:
+
+- **Svelte for VS Code**: Syntax highlighting and IntelliSense for Svelte
+- **ESLint**: JavaScript/TypeScript linting
+- **Prettier**: Code formatting
+- **Prisma**: Schema syntax highlighting and formatting
+- **Tailwind CSS IntelliSense**: Tailwind class name completion
+
+## Port Forwarding
+
+The following ports are automatically forwarded:
+
+- **5173**: Vite development server
+- **5555**: Prisma Studio
 
 ## Troubleshooting
 
-### Container fails to build
-- Ensure Docker Desktop is running
-- Try rebuilding: `F1` → "Dev Containers: Rebuild Container"
-- Check Docker Desktop has enough resources (2GB+ RAM recommended)
+### Container Won't Start
 
-### Database connection fails
-- Verify `DATABASE_URL` is set in `.env` file
-- Check the connection string format matches Neon's requirements
-- Ensure your Neon database is accessible from your network
+1. Ensure Docker Desktop is running
+2. Check Docker Desktop has enough resources (2GB+ RAM recommended)
+3. Try rebuilding the container: Command Palette → `Dev Containers: Rebuild Container`
 
-### Extensions not loading
-- Rebuild the container: `F1` → "Dev Containers: Rebuild Container"
-- Check the extensions are listed in `.devcontainer/devcontainer.json`
+### Database Connection Fails
 
-### pnpm commands not working
-- The container should have pnpm pre-installed
-- If missing, run: `npm install -g pnpm`
+1. Verify your `DATABASE_URL` in `.env` is correct
+2. Check that your Neon database is active (not paused)
+3. Ensure the connection string includes `?sslmode=require`
+4. Test connection with: `pnpm prisma db pull`
 
-## Platform-Specific Notes
+### Dependencies Not Installing
 
-### Windows (WSL2)
-- Ensure WSL2 is enabled and Docker Desktop is configured to use it
-- Store the project in the WSL2 filesystem for better performance
-- Access via `\\wsl$\Ubuntu\home\...` in Windows Explorer
+1. Clear pnpm cache: `pnpm store prune`
+2. Remove node_modules: `rm -rf node_modules`
+3. Reinstall: `pnpm install`
 
-### macOS
-- Docker Desktop on Apple Silicon (M1/M2) works with the devcontainer
-- First build may take longer on Apple Silicon
+### Extensions Not Working
+
+1. Reload VS Code window: Command Palette → `Developer: Reload Window`
+2. Check that extensions are enabled in the container
+3. Rebuild container if issues persist
+
+## Performance Tips
+
+### macOS and Windows
+
+- Docker Desktop performance can vary
+- Consider increasing Docker Desktop memory allocation (Settings → Resources)
+- Use Docker Desktop's "VirtioFS" file sharing on macOS for better performance
 
 ### Linux
-- Ensure your user is in the `docker` group
-- Run: `sudo usermod -aG docker $USER` and restart
 
-## Environment Variables
+- Native Docker performance is generally excellent
+- No special configuration needed
 
-The devcontainer automatically mounts your `.env` file. Required variables:
+## Exiting the DevContainer
 
-- `DATABASE_URL` - Neon PostgreSQL connection string
-- `AUTH_SECRET` - Auth.js secret (for authentication)
-- `GOOGLE_CLIENT_ID` - Google OAuth client ID
-- `GOOGLE_CLIENT_SECRET` - Google OAuth client secret
+To return to your local environment:
 
-See `.env.example` for the complete list and format.
+1. Command Palette → `Dev Containers: Reopen Folder Locally`
+2. Or simply close VS Code
+
+Your work is saved in the project directory and persists outside the container.
+
+## Additional Resources
+
+- [VS Code DevContainers Documentation](https://code.visualstudio.com/docs/devcontainers/containers)
+- [Neon Documentation](https://neon.tech/docs)
+- [pnpm Documentation](https://pnpm.io/)
+- [SvelteKit Documentation](https://kit.svelte.dev/)

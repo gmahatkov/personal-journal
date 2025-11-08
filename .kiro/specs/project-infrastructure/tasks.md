@@ -35,7 +35,7 @@
   - Create extensions.json with recommended extensions list
   - _Requirements: 4.1, 4.3_
 
-- [ ] 5. Create environment variable template and documentation
+- [x] 5. Create environment variable template and documentation
   - Create .env.example file with DATABASE_URL template for Neon
   - Add .env to .gitignore if not already present
   - Update README.md with devcontainer setup instructions
