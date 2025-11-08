@@ -25,7 +25,7 @@
     - Connect to theme store
     - _Requirements: 1.1, 1.5_
 
-- [ ] 3. Install and configure Storybook
+- [x] 3. Install and configure Storybook
   - [x] 3.1 Install Storybook dependencies
     - Install `@storybook/sveltekit`, `@storybook/addon-essentials`, `@storybook/addon-a11y`, `@storybook/addon-svelte-csf`
     - Update `package.json` with Storybook scripts
@@ -42,22 +42,22 @@
     - Implement decorator that applies theme class to document root
     - _Requirements: 8.3_
 
-- [ ] 4. Create Button base component
-  - [ ] 4.1 Implement Button component with variants
+- [x] 4. Create Button base component
+  - [x] 4.1 Implement Button component with variants
     - Create `src/lib/frontend/components/base/Button.svelte`
     - Define props interface (variant, size, disabled, type, class)
     - Implement base styling with bold borders and hard shadows
     - Add variant styles (primary, secondary, outline, ghost)
     - Implement size variations (sm, md, lg)
     - _Requirements: 3.1, 3.6_
-  - [ ] 4.2 Add interactive states and animations
+  - [x] 4.2 Add interactive states and animations
     - Implement hover state with shadow shift effect
     - Add active state with shadow removal and position shift
     - Create focus state with bold outline ring (3px minimum)
     - Add smooth transitions (150ms duration)
     - Ensure all states meet contrast requirements
     - _Requirements: 4.1, 4.2, 4.3, 4.4, 6.2_
-  - [ ] 4.3 Create Button Storybook stories
+  - [x] 4.3 Create Button Storybook stories
     - Create `src/stories/base/Button.stories.ts`
     - Add stories for all variants (primary, secondary, outline, ghost)
     - Add stories for all sizes (sm, md, lg)

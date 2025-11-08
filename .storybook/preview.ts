@@ -22,9 +22,19 @@ const preview: Preview = {
 		(story, context) => {
 			const theme = context.globals.theme || 'light';
 
-			// Apply theme class to document root
+			// Apply theme class to document root and body
 			if (typeof document !== 'undefined') {
 				document.documentElement.classList.toggle('dark', theme === 'dark');
+				document.body.classList.toggle('dark', theme === 'dark');
+
+				// Apply background color
+				if (theme === 'dark') {
+					document.body.style.backgroundColor = '#1a1a1a';
+					document.body.style.color = '#f5f5f5';
+				} else {
+					document.body.style.backgroundColor = '#f5f5f5';
+					document.body.style.color = '#1a1a1a';
+				}
 			}
 
 			return story();
