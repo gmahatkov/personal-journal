@@ -1,0 +1,249 @@
+# Implementation Plan
+
+- [x] 1. Set up design tokens and theme infrastructure
+  - Create CSS custom properties for all design tokens (colors, shadows, spacing) in `src/app.css`
+  - Extend Tailwind configuration with neo-brutalist design tokens in `tailwind.config.js`
+  - Add custom border widths (3px, 5px) and shadow utilities to Tailwind config
+  - _Requirements: 2.1, 2.2, 2.3, 2.4, 2.5, 2.6_
+
+- [ ] 2. Implement theme management system
+  - [ ] 2.1 Create theme store with localStorage persistence
+    - Write Svelte writable store in `src/lib/frontend/stores/theme.ts`
+    - Implement system preference detection using `matchMedia('prefers-color-scheme: dark')`
+    - Add localStorage read/write with error handling
+    - Implement theme toggle and set functions
+    - _Requirements: 1.2, 1.3, 1.4_
+  - [ ] 2.2 Create theme initialization logic
+    - Add theme initialization function that runs on app load
+    - Apply theme class to document root element
+    - Handle localStorage unavailability gracefully
+    - _Requirements: 1.3, 1.4_
+  - [ ] 2.3 Implement theme toggle UI component
+    - Create `ThemeToggle.svelte` component in `src/lib/frontend/components/base/`
+    - Add sun/moon icons for visual feedback
+    - Implement smooth transition animations
+    - Connect to theme store
+    - _Requirements: 1.1, 1.5_
+
+- [ ] 3. Install and configure Storybook
+  - [ ] 3.1 Install Storybook dependencies
+    - Install `@storybook/sveltekit`, `@storybook/addon-essentials`, `@storybook/addon-a11y`, `@storybook/addon-svelte-csf`
+    - Update `package.json` with Storybook scripts
+    - _Requirements: 8.1_
+  - [ ] 3.2 Configure Storybook for SvelteKit
+    - Create `.storybook/main.ts` with SvelteKit framework configuration
+    - Configure story file patterns to include `src/**/*.stories.@(js|ts|svelte)`
+    - Add required addons (essentials, a11y, interactions, svelte-csf)
+    - _Requirements: 8.1_
+  - [ ] 3.3 Set up theme decorator and global styles
+    - Create `.storybook/preview.ts` with theme decorator
+    - Import `src/app.css` to make Tailwind and design tokens available
+    - Add theme toolbar control for switching between light/dark
+    - Implement decorator that applies theme class to document root
+    - _Requirements: 8.3_
+
+- [ ] 4. Create Button base component
+  - [ ] 4.1 Implement Button component with variants
+    - Create `src/lib/frontend/components/base/Button.svelte`
+    - Define props interface (variant, size, disabled, type, class)
+    - Implement base styling with bold borders and hard shadows
+    - Add variant styles (primary, secondary, outline, ghost)
+    - Implement size variations (sm, md, lg)
+    - _Requirements: 3.1, 3.6_
+  - [ ] 4.2 Add interactive states and animations
+    - Implement hover state with shadow shift effect
+    - Add active state with shadow removal and position shift
+    - Create focus state with bold outline ring (3px minimum)
+    - Add smooth transitions (150ms duration)
+    - Ensure all states meet contrast requirements
+    - _Requirements: 4.1, 4.2, 4.3, 4.4, 6.2_
+  - [ ] 4.3 Create Button Storybook stories
+    - Create `src/stories/base/Button.stories.ts`
+    - Add stories for all variants (primary, secondary, outline, ghost)
+    - Add stories for all sizes (sm, md, lg)
+    - Add stories for disabled state
+    - Document props and usage in story metadata
+    - _Requirements: 8.2, 8.4_
+
+- [ ] 5. Create Card base component
+  - [ ] 5.1 Implement Card component
+    - Create `src/lib/frontend/components/base/Card.svelte`
+    - Define props interface (variant, padding, class)
+    - Implement base styling with bold borders
+    - Add variant styles (default, elevated, bordered)
+    - Implement padding variations (none, sm, md, lg)
+    - Add slot for card content
+    - _Requirements: 3.2_
+  - [ ] 5.2 Create Card Storybook stories
+    - Create `src/stories/base/Card.stories.ts`
+    - Add stories for all variants
+    - Add stories showing different padding options
+    - Add example with nested content
+    - _Requirements: 8.2, 8.4_
+
+- [ ] 6. Create Input base component
+  - [ ] 6.1 Implement Input component
+    - Create `src/lib/frontend/components/base/Input.svelte`
+    - Define props interface (type, value, placeholder, disabled, error, class)
+    - Implement base styling with bold borders
+    - Add focus state with bold ring (3px minimum)
+    - Implement error state styling
+    - Add disabled state styling
+    - _Requirements: 3.3, 4.3, 6.2_
+  - [ ] 6.2 Create Input Storybook stories
+    - Create `src/stories/base/Input.stories.ts`
+    - Add stories for different input types (text, email, password)
+    - Add stories for error state
+    - Add stories for disabled state
+    - Add story showing focus state
+    - _Requirements: 8.2, 8.4_
+
+- [ ] 7. Create Badge base component
+  - [ ] 7.1 Implement Badge component
+    - Create `src/lib/frontend/components/base/Badge.svelte`
+    - Define props interface (variant, size, class)
+    - Implement base styling with borders and high contrast
+    - Add variant styles (primary, secondary, success, warning, error)
+    - Implement size variations (sm, md)
+    - Add slot for badge content
+    - _Requirements: 3.4, 4.4_
+  - [ ] 7.2 Create Badge Storybook stories
+    - Create `src/stories/base/Badge.stories.ts`
+    - Add stories for all variants
+    - Add stories for both sizes
+    - Add examples with different content (text, icons)
+    - _Requirements: 8.2, 8.4_
+
+- [ ] 8. Create Modal base component
+  - [ ] 8.1 Implement Modal component
+    - Create `src/lib/frontend/components/base/Modal.svelte`
+    - Define props interface (open, title, size, class)
+    - Implement backdrop with semi-transparent overlay
+    - Create modal container with bold borders and large shadow
+    - Add size variations (sm, md, lg, xl)
+    - Implement header, body, and footer slots
+    - Add close button with keyboard support (Escape key)
+    - _Requirements: 3.5, 6.3_
+  - [ ] 8.2 Create Modal Storybook stories
+    - Create `src/stories/base/Modal.stories.ts`
+    - Add stories for all sizes
+    - Add story with header, body, and footer content
+    - Add story demonstrating keyboard interaction
+    - _Requirements: 8.2, 8.4_
+
+- [ ] 9. Create Flowbite component wrappers
+  - [ ] 9.1 Identify and document Flowbite components needing wrappers
+    - Review existing Flowbite Svelte components used in the project
+    - Document which components need custom styling wrappers
+    - Create wrapper strategy documentation
+    - _Requirements: 7.4_
+  - [ ] 9.2 Implement Dropdown wrapper
+    - Create `src/lib/frontend/components/wrappers/BrutalDropdown.svelte`
+    - Import Flowbite Dropdown component
+    - Apply neo-brutalist styling via class prop
+    - Ensure theme switching works correctly
+    - Test compatibility with Flowbite API
+    - _Requirements: 7.1, 7.2, 7.3, 7.5_
+  - [ ] 9.3 Implement Navbar wrapper
+    - Create `src/lib/frontend/components/wrappers/BrutalNavbar.svelte`
+    - Import Flowbite Navbar component
+    - Apply neo-brutalist styling
+    - Ensure theme compatibility
+    - _Requirements: 7.1, 7.2, 7.3, 7.5_
+  - [ ] 9.4 Create wrapper component stories
+    - Create stories for each wrapper component
+    - Document wrapper usage patterns
+    - Show examples of wrapped vs unwrapped components
+    - _Requirements: 8.2, 8.4_
+
+- [ ] 10. Create design tokens documentation
+  - [ ] 10.1 Create design tokens documentation page
+    - Create `src/stories/Tokens.stories.ts` or `Tokens.mdx`
+    - Document all color tokens with visual swatches
+    - Show color values for both light and dark themes
+    - Document spacing scale with visual examples
+    - Document typography tokens (fonts, sizes, weights)
+    - Document shadow tokens with visual examples
+    - Document border width tokens
+    - _Requirements: 5.1, 5.2, 5.3, 5.4, 5.5, 8.6_
+  - [ ] 10.2 Create Introduction documentation
+    - Create `src/stories/Introduction.mdx`
+    - Explain neo-brutalist design principles
+    - Provide usage guidelines for the design system
+    - Document theme switching functionality
+    - Add examples of component composition
+    - _Requirements: 5.1, 8.4_
+
+- [ ] 11. Implement accessibility features
+  - [ ] 11.1 Add keyboard navigation support
+    - Ensure all interactive components support Tab navigation
+    - Implement proper focus management in Modal component
+    - Add keyboard shortcuts where appropriate (Escape to close modals)
+    - Test keyboard-only navigation flow
+    - _Requirements: 6.3_
+  - [ ] 11.2 Add reduced motion support
+    - Add `prefers-reduced-motion` media query handling
+    - Disable or reduce animations when user prefers reduced motion
+    - Test with system reduced motion setting enabled
+    - _Requirements: 6.5_
+  - [ ] 11.3 Verify WCAG contrast requirements
+    - Test all color combinations with contrast checker
+    - Ensure minimum 4.5:1 contrast for normal text
+    - Ensure minimum 3:1 contrast for large text and UI components
+    - Document contrast ratios in design tokens documentation
+    - _Requirements: 6.1, 4.4_
+
+- [ ] 12. Integrate theme system into application
+  - [ ] 12.1 Add theme initialization to root layout
+    - Import and initialize theme store in `src/routes/+layout.svelte`
+    - Add theme class binding to root element
+    - Ensure theme loads before first paint to prevent flash
+    - _Requirements: 1.3, 1.4_
+  - [ ] 12.2 Add theme toggle to application UI
+    - Add ThemeToggle component to navigation or header
+    - Position toggle in accessible location
+    - Test theme switching across all pages
+    - _Requirements: 1.1_
+  - [ ] 12.3 Update existing components to use design tokens
+    - Review existing components in `src/lib/frontend/components/`
+    - Replace hardcoded colors with design token classes
+    - Test components in both light and dark themes
+    - _Requirements: 1.1, 7.5_
+
+- [ ] 13. Create component usage examples
+  - [ ] 13.1 Create example compositions in Storybook
+    - Create stories showing common component combinations
+    - Add example of form layout using Input and Button
+    - Add example of card grid layout
+    - Add example of modal with form content
+    - _Requirements: 5.4, 8.4_
+  - [ ] 13.2 Document component composition patterns
+    - Document best practices for combining components
+    - Provide code examples for common patterns
+    - Add accessibility considerations for compositions
+    - _Requirements: 5.1, 5.4_
+
+- [ ] 14. Testing and quality assurance
+  - [ ] 14.1 Write unit tests for theme store
+    - Test theme initialization from system preference
+    - Test theme persistence to localStorage
+    - Test theme toggle functionality
+    - Test localStorage error handling
+    - _Requirements: 1.2, 1.3, 1.4_
+  - [ ] 14.2 Write component accessibility tests
+    - Add accessibility tests using @storybook/addon-a11y
+    - Test keyboard navigation for all interactive components
+    - Test focus indicators visibility
+    - Test ARIA attributes and roles
+    - _Requirements: 6.1, 6.2, 6.3_
+  - [ ] 14.3 Perform manual accessibility audit
+    - Test with screen reader (VoiceOver on macOS)
+    - Test keyboard-only navigation
+    - Test with reduced motion enabled
+    - Document any accessibility issues found
+    - _Requirements: 6.3, 6.5_
+  - [ ] 14.4 Test theme switching performance
+    - Measure theme switch duration (should be < 100ms)
+    - Test theme switching with many components on page
+    - Optimize if performance issues found
+    - _Requirements: 1.1, 1.5_
