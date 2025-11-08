@@ -27,7 +27,7 @@
   - Configure environment variable mounting for DATABASE_URL
   - _Requirements: 1.1, 1.2, 1.3, 1.4, 1.5, 2.5, 4.2, 4.4_
 
-- [ ] 4. Create VS Code workspace settings
+- [x] 4. Create VS Code workspace settings
   - Create .vscode directory if it doesn't exist
   - Create settings.json with Svelte, ESLint, Prettier, and Tailwind configurations
   - Enable format on save and auto-fix on save
