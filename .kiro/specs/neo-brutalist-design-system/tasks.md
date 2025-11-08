@@ -65,16 +65,17 @@
     - Document props and usage in story metadata
     - _Requirements: 8.2, 8.4_
 
-- [ ] 5. Create Card base component
-  - [ ] 5.1 Implement Card component
+- [x] 5. Create Card base component
+  - [x] 5.1 Implement Card component
     - Create `src/lib/frontend/components/base/Card.svelte`
-    - Define props interface (variant, padding, class)
+    - Use Flowbite corresponding component and customize it
+    - Define props interface matching Flowbite component
     - Implement base styling with bold borders
     - Add variant styles (default, elevated, bordered)
     - Implement padding variations (none, sm, md, lg)
     - Add slot for card content
     - _Requirements: 3.2_
-  - [ ] 5.2 Create Card Storybook stories
+  - [x] 5.2 Create Card Storybook stories
     - Create `src/stories/base/Card.stories.ts`
     - Add stories for all variants
     - Add stories showing different padding options
