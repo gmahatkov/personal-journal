@@ -11,11 +11,7 @@ import type { Account } from '@prisma/client';
 const RemoteFileProviderMap: Map<
 	RemoteFileProviderName,
 	IRemoteFileSearcherConstructor<Record<string, any>, RemoteFileProviderName>
-> = new Map([
-	['google-drive', GoogleDrive],
-	['dropbox', GoogleDrive],
-	['onedrive', GoogleDrive]
-]);
+> = new Map([['google-drive', GoogleDrive]]);
 
 export function createRemoteFileSearcher<
 	SearchParams extends Record<string, any>,
