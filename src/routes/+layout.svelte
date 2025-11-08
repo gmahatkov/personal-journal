@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { theme } from '$lib/frontend/stores/theme';
+	import ThemeToggle from '$lib/frontend/components/base/ThemeToggle.svelte';
 	import '../app.css';
 
 	// Initialize theme on app load
@@ -22,6 +23,7 @@
 	}
 </script>
 
-<main class="flex h-dvh w-full bg-gray-100">
+<main class="flex h-dvh w-full bg-brutal-bg transition-colors duration-brutal">
+	<ThemeToggle />
 	<slot />
 </main>
