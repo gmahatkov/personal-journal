@@ -102,19 +102,17 @@
     - Add story showing focus state
     - _Requirements: 8.2, 8.4_
 
-- [ ] 7. Create Badge base component
-  - [ ] 7.1 Implement Badge component
-    - Create `src/lib/frontend/components/base/Badge.svelte`
-    - Define props interface (variant, size, class)
-    - Implement base styling with borders and high contrast
-    - Add variant styles (primary, secondary, success, warning, error)
-    - Implement size variations (sm, md)
-    - Add slot for badge content
+- [x] 7. Create Typography base components
+  - [x] 7.1 Implement Typography components (P, Blockquote, Heading, HR, Image, Link, List)
+    - Create `src/lib/frontend/components/base/typography/` directory
+    - Use the same file and component names as Flowbite form components do
+    - Pass the same props as Flowbite components do
+    - Use the same variants as Flowbite components do
     - _Requirements: 3.4, 4.4_
-  - [ ] 7.2 Create Badge Storybook stories
-    - Create `src/stories/base/Badge.stories.ts`
-    - Add stories for all variants
-    - Add stories for both sizes
+  - [x] 7.2 Create Typography Storybook stories
+    - Create `src/stories/base/typography/` directory
+    - Add stories for all typography components
+    - Add stories for all sizes, variants and etc
     - Add examples with different content (text, icons)
     - _Requirements: 8.2, 8.4_
 
