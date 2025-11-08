@@ -67,10 +67,21 @@ prisma/
 
 - Organize components by feature in `src/lib/frontend/components/`
 - Component folders use PascalCase (e.g., `AppImageSearch/`)
-- Flowbite Svelte provides base UI components
+- **Base components** in `src/lib/frontend/components/base/`:
+  - Custom design system components (Button, Card, Input, etc.)
+  - Neo-brutalist design aesthetic with bold borders and shadows
+  - Theme-aware with light/dark mode support via `theme` store
+  - Documented in Storybook (`src/stories/base/`)
+  - Use base components instead of Flowbite for consistent design
+- Flowbite Svelte available for additional UI patterns
 
 ### Styling
 
 - Tailwind CSS with Flowbite plugin
 - Custom theme colors defined in `tailwind.config.js`
 - Component styles use Tailwind utility classes
+- Neo-brutalist design tokens:
+  - Bold borders (2-4px)
+  - Strong shadows for depth
+  - High contrast colors
+  - Flat, geometric shapes
