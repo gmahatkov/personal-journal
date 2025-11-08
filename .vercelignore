@@ -1,0 +1,33 @@
+# Development container files
+.devcontainer/
+
+# Test files
+tests/
+*.test.ts
+*.spec.ts
+
+# Local environment files
+.env.local
+.env*.local
+
+# Build artifacts
+.svelte-kit/
+build/
+node_modules/
+
+# IDE files
+.vscode/
+.idea/
+
+# Git files
+.git/
+.gitignore
+
+# Documentation
+*.md
+!README.md
+
+# Docker files
+Dockerfile
+docker-compose.yml
+.dockerignore
