@@ -45,7 +45,7 @@
   - Create .devcontainer/README.md with devcontainer-specific instructions
   - _Requirements: 3.4, 4.1_
 
-- [ ] 6. Update existing docker-compose.yml
+- [x] 6. Update existing docker-compose.yml
   - Simplify or remove docker-compose.yml since PostgreSQL is hosted on Neon
   - Update Dockerfile if needed to use pnpm instead of npm
   - _Requirements: 2.1_
