@@ -20,7 +20,7 @@
 	<NavBrand>Personal Journal</NavBrand>
 	<div class="flex items-center md:order-2">
 		<Avatar id="avatar-menu" src={$page.data.session?.user?.image ?? ''} />
-		<NavHamburger class1="w-full md:flex md:w-auto md:order-1" />
+		<NavHamburger class="w-full md:flex md:w-auto md:order-1" />
 	</div>
 	<Dropdown placement="bottom" triggeredBy="#avatar-menu">
 		<DropdownHeader>

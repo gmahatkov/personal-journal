@@ -1,0 +1,59 @@
+{
+	"name": "Image Reference Manager",
+	"image": "mcr.microsoft.com/devcontainers/typescript-node:1-20-bookworm",
+	
+	"features": {
+		"ghcr.io/devcontainers/features/git:1": {},
+		"ghcr.io/devcontainers-contrib/features/pnpm:2": {
+			"version": "8"
+		}
+	},
+
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"svelte.svelte-vscode",
+				"dbaeumer.vscode-eslint",
+				"esbenp.prettier-vscode",
+				"Prisma.prisma",
+				"bradlc.vscode-tailwindcss"
+			],
+			"settings": {
+				"editor.formatOnSave": true,
+				"editor.defaultFormatter": "esbenp.prettier-vscode",
+				"editor.codeActionsOnSave": {
+					"source.fixAll.eslint": "explicit"
+				},
+				"svelte.enable-ts-plugin": true,
+				"[svelte]": {
+					"editor.defaultFormatter": "svelte.svelte-vscode"
+				},
+				"tailwindCSS.experimental.classRegex": [
+					["class:\\s*['\"`]([^'\"`]*)['\"`]", "([^'\"`]*)"]
+				]
+			}
+		}
+	},
+
+	"forwardPorts": [5173, 5555],
+	"portsAttributes": {
+		"5173": {
+			"label": "Vite Dev Server",
+			"onAutoForward": "notify"
+		},
+		"5555": {
+			"label": "Prisma Studio",
+			"onAutoForward": "silent"
+		}
+	},
+
+	"postCreateCommand": "pnpm install && npx prisma generate",
+
+	"remoteEnv": {
+		"DATABASE_URL": "${localEnv:DATABASE_URL}"
+	},
+
+	"mounts": [
+		"source=${localEnv:HOME}/.env,target=/workspace/.env,type=bind,consistency=cached"
+	]
+}

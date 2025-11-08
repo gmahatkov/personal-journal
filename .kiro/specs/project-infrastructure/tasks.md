@@ -18,7 +18,7 @@
   - Add Prisma generate step to build command
   - _Requirements: 3.1, 3.2, 3.3, 3.5_
 
-- [ ] 3. Create devcontainer configuration
+- [x] 3. Create devcontainer configuration
   - Create .devcontainer directory
   - Create devcontainer.json with Node.js 20 base image and pnpm feature
   - Configure VS Code extensions (Svelte, ESLint, Prettier, Prisma, Tailwind CSS)
