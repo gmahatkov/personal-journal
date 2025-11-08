@@ -82,17 +82,20 @@
     - Add example with nested content
     - _Requirements: 8.2, 8.4_
 
-- [ ] 6. Create Input base component
-  - [ ] 6.1 Implement Input component
-    - Create `src/lib/frontend/components/base/Input.svelte`
-    - Define props interface (type, value, placeholder, disabled, error, class)
+- [x] 6. Create Form base components
+  - [x] 6.1 Implement form components
+    - Create `src/lib/frontend/components/base/form/`
+    - Use the same file and component names as Flowbite form components do
+    - Use Flowbite corresponding components and customize it
     - Implement base styling with bold borders
-    - Add focus state with bold ring (3px minimum)
+    - Add focus and active states with bold ring (3px minimum) if Flowbite components have it
+    - Implement passing all Flowbite component props
     - Implement error state styling
+    - Implement success state styling
     - Add disabled state styling
     - _Requirements: 3.3, 4.3, 6.2_
-  - [ ] 6.2 Create Input Storybook stories
-    - Create `src/stories/base/Input.stories.ts`
+  - [x] 6.2 Create corresponding Storybook stories
+    - Create `src/stories/base/form/`
     - Add stories for different input types (text, email, password)
     - Add stories for error state
     - Add stories for disabled state
