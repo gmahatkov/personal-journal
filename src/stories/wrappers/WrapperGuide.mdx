@@ -1,0 +1,197 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Wrappers/Usage Guide" />
+
+# Flowbite Component Wrappers
+
+## Overview
+
+Wrapper components provide neo-brutalist styling for Flowbite Svelte components while maintaining full API compatibility. Use wrappers when you need consistent design system styling for Flowbite components.
+
+## When to Use Wrappers
+
+### ✅ Use Wrappers When:
+
+- Building layout components (navigation, sidebars, etc.)
+- You need consistent neo-brutalist styling across the app
+- The component is used in multiple places
+- You want automatic theme switching support
+
+### ❌ Don't Use Wrappers When:
+
+- A base component already exists (use `base/Button.svelte` instead of wrapping Flowbite Button)
+- The component is only used once in a specific context
+- You need highly customized styling for a single use case
+
+## Available Wrappers
+
+### BrutalDropdown
+
+Wraps Flowbite's Dropdown, DropdownItem, and DropdownHeader components.
+
+```svelte
+<script>
+	import {
+		BrutalDropdown,
+		BrutalDropdownItem,
+		BrutalDropdownHeader
+	} from '$lib/frontend/components/wrappers';
+	import Button from '$lib/frontend/components/base/Button.svelte';
+</script>
+
+<Button id="menu-trigger">Menu</Button>
+
+<BrutalDropdown triggeredBy="#menu-trigger">
+	<svelte:fragment slot="header">
+		<BrutalDropdownHeader>
+			<span class="block text-sm font-bold">User Name</span>
+			<span class="block text-sm">user@example.com</span>
+		</BrutalDropdownHeader>
+	</svelte:fragment>
+
+	<BrutalDropdownItem>Dashboard</BrutalDropdownItem>
+	<BrutalDropdownItem>Settings</BrutalDropdownItem>
+	<BrutalDropdownItem>Sign out</BrutalDropdownItem>
+</BrutalDropdown>
+```
+
+**Features:**
+
+- Bold 3px borders
+- Hard offset shadows
+- Theme-aware colors
+- All Flowbite Dropdown props supported
+
+### BrutalNavbar
+
+Wraps Flowbite's Navbar component.
+
+```svelte
+<script>
+	import { BrutalNavbar } from '$lib/frontend/components/wrappers';
+	import { NavBrand, NavHamburger } from 'flowbite-svelte';
+</script>
+
+<BrutalNavbar>
+	<NavBrand href="/">Brand Name</NavBrand>
+	<NavHamburger />
+	<!-- Navigation items -->
+</BrutalNavbar>
+```
+
+**Features:**
+
+- Bold bottom border (4px)
+- Theme-aware background and text colors
+- Removes default shadow (uses border instead)
+- All Flowbite Navbar props supported
+
+## Migration Guide
+
+### From Flowbite to Brutal Wrappers
+
+**Before:**
+
+```svelte
+<script>
+	import { Dropdown, DropdownItem } from 'flowbite-svelte';
+</script>
+
+<Dropdown triggeredBy="#trigger">
+	<DropdownItem>Item 1</DropdownItem>
+</Dropdown>
+```
+
+**After:**
+
+```svelte
+<script>
+	import { BrutalDropdown, BrutalDropdownItem } from '$lib/frontend/components/wrappers';
+</script>
+
+<BrutalDropdown triggeredBy="#trigger">
+	<BrutalDropdownItem>Item 1</BrutalDropdownItem>
+</BrutalDropdown>
+```
+
+**Changes:**
+
+- Import from `$lib/frontend/components/wrappers` instead of `flowbite-svelte`
+- Use `Brutal` prefix for component names
+- All props and events work identically
+- Styling is automatically applied
+
+## Styling Customization
+
+Wrappers apply default neo-brutalist styling but allow customization via the `class` prop:
+
+```svelte
+<BrutalDropdown class="custom-class" triggeredBy="#trigger">
+	<!-- Items -->
+</BrutalDropdown>
+```
+
+The custom class is merged with the default brutal styling, allowing you to:
+
+- Override specific properties
+- Add additional styling
+- Adjust spacing or sizing
+
+## Theme Support
+
+All wrappers use design tokens for theme switching:
+
+- `--brutal-bg` - Background color
+- `--brutal-surface` - Surface color
+- `--brutal-text` - Text color
+- `--brutal-border` - Border color
+- `--brutal-primary` - Primary accent color
+
+Theme switching happens automatically when the `dark` class is toggled on the document root.
+
+## API Compatibility
+
+Wrappers maintain 100% API compatibility with Flowbite components:
+
+- All props are passed through
+- All events are forwarded
+- All slots are supported
+- TypeScript types are preserved
+
+This means you can use Flowbite documentation as a reference for wrapper components.
+
+## Best Practices
+
+1. **Import from wrappers directory**: Always use the barrel export
+
+   ```svelte
+   import {BrutalDropdown} from '$lib/frontend/components/wrappers';
+   ```
+
+2. **Combine with base components**: Use base components for buttons, inputs, etc.
+
+   ```svelte
+   <Button id="trigger">Open</Button>
+   <BrutalDropdown triggeredBy="#trigger">...</BrutalDropdown>
+   ```
+
+3. **Leverage design tokens**: Use brutal color classes for consistency
+
+   ```svelte
+   <BrutalDropdownItem class="text-brutal-error">Delete</BrutalDropdownItem>
+   ```
+
+4. **Test theme switching**: Always verify components work in both light and dark themes
+
+## Contributing
+
+To create a new wrapper:
+
+1. Create the wrapper component in `src/lib/frontend/components/wrappers/`
+2. Apply neo-brutalist styling using design tokens
+3. Export all Flowbite props
+4. Add to `index.ts` barrel export
+5. Create Storybook stories
+6. Update this documentation
+
+See `src/lib/frontend/components/wrappers/README.md` for detailed wrapper strategy.

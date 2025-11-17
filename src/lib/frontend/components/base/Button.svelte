@@ -5,6 +5,7 @@
 	export let size: 'sm' | 'md' | 'lg' = 'md';
 	export let disabled = false;
 	export let type: 'button' | 'submit' | 'reset' = 'button';
+	export let id: string = '';
 	let className = '';
 	export { className as class };
 
@@ -53,6 +54,7 @@
 <FlowbiteButton
 	{type}
 	{disabled}
+	{id}
 	color={flowbiteColor}
 	outline={flowbiteOutline}
 	size={flowbiteSize}
