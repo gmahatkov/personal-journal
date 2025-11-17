@@ -116,20 +116,17 @@
     - Add examples with different content (text, icons)
     - _Requirements: 8.2, 8.4_
 
-- [ ] 8. Create Modal base component
-  - [ ] 8.1 Implement Modal component
+- [-] 8. Create Modal base component
+  - [x] 8.1 Implement Modal component
     - Create `src/lib/frontend/components/base/Modal.svelte`
-    - Define props interface (open, title, size, class)
-    - Implement backdrop with semi-transparent overlay
-    - Create modal container with bold borders and large shadow
-    - Add size variations (sm, md, lg, xl)
-    - Implement header, body, and footer slots
-    - Add close button with keyboard support (Escape key)
+    - Use Flowbite corresponding component and customize it
+    - Define all flowbite props interface (open, title, size, class and etc.)
+    - This component should be a proxy to Flowbite original component but having customnized design
     - _Requirements: 3.5, 6.3_
-  - [ ] 8.2 Create Modal Storybook stories
+  - [-] 8.2 Create Modal Storybook stories
     - Create `src/stories/base/Modal.stories.ts`
     - Add stories for all sizes
-    - Add story with header, body, and footer content
+    - Add story with header, body, and footer content and etc
     - Add story demonstrating keyboard interaction
     - _Requirements: 8.2, 8.4_
 
