@@ -1,0 +1,156 @@
+# Implementation Plan
+
+- [x] 1. Set up design tokens and theme infrastructure
+  - Create CSS custom properties for all design tokens (colors, shadows, spacing) in `src/app.css`
+  - Extend Tailwind configuration with neo-brutalist design tokens in `tailwind.config.js`
+  - Add custom border widths (3px, 5px) and shadow utilities to Tailwind config
+  - _Requirements: 2.1, 2.2, 2.3, 2.4, 2.5, 2.6_
+
+- [x] 2. Implement theme management system
+  - [x] 2.1 Create theme store with localStorage persistence
+    - Write Svelte writable store in `src/lib/frontend/stores/theme.ts`
+    - Implement system preference detection using `matchMedia('prefers-color-scheme: dark')`
+    - Add localStorage read/write with error handling
+    - Implement theme toggle and set functions
+    - _Requirements: 1.2, 1.3, 1.4_
+  - [x] 2.2 Create theme initialization logic
+    - Add theme initialization function that runs on app load
+    - Apply theme class to document root element
+    - Handle localStorage unavailability gracefully
+    - _Requirements: 1.3, 1.4_
+  - [x] 2.3 Implement theme toggle UI component
+    - Create `ThemeToggle.svelte` component in `src/lib/frontend/components/base/`
+    - Add sun/moon icons for visual feedback
+    - Implement smooth transition animations
+    - Connect to theme store
+    - _Requirements: 1.1, 1.5_
+
+- [x] 3. Install and configure Storybook
+  - [x] 3.1 Install Storybook dependencies
+    - Install `@storybook/sveltekit`, `@storybook/addon-essentials`, `@storybook/addon-a11y`, `@storybook/addon-svelte-csf`
+    - Update `package.json` with Storybook scripts
+    - _Requirements: 8.1_
+  - [x] 3.2 Configure Storybook for SvelteKit
+    - Create `.storybook/main.ts` with SvelteKit framework configuration
+    - Configure story file patterns to include `src/**/*.stories.@(js|ts|svelte)`
+    - Add required addons (essentials, a11y, interactions, svelte-csf)
+    - _Requirements: 8.1_
+  - [x] 3.3 Set up theme decorator and global styles
+    - Create `.storybook/preview.ts` with theme decorator
+    - Import `src/app.css` to make Tailwind and design tokens available
+    - Add theme toolbar control for switching between light/dark
+    - Implement decorator that applies theme class to document root
+    - _Requirements: 8.3_
+
+- [x] 4. Create Button base component
+  - [x] 4.1 Implement Button component with variants
+    - Create `src/lib/frontend/components/base/Button.svelte`
+    - Define props interface (variant, size, disabled, type, class)
+    - Implement base styling with bold borders and hard shadows
+    - Add variant styles (primary, secondary, outline, ghost)
+    - Implement size variations (sm, md, lg)
+    - _Requirements: 3.1, 3.6_
+  - [x] 4.2 Add interactive states and animations
+    - Implement hover state with shadow shift effect
+    - Add active state with shadow removal and position shift
+    - Create focus state with bold outline ring (3px minimum)
+    - Add smooth transitions (150ms duration)
+    - Ensure all states meet contrast requirements
+    - _Requirements: 4.1, 4.2, 4.3, 4.4, 6.2_
+  - [x] 4.3 Create Button Storybook stories
+    - Create `src/stories/base/Button.stories.ts`
+    - Add stories for all variants (primary, secondary, outline, ghost)
+    - Add stories for all sizes (sm, md, lg)
+    - Add stories for disabled state
+    - Document props and usage in story metadata
+    - _Requirements: 8.2, 8.4_
+
+- [x] 5. Create Card base component
+  - [x] 5.1 Implement Card component
+    - Create `src/lib/frontend/components/base/Card.svelte`
+    - Use Flowbite corresponding component and customize it
+    - Define props interface matching Flowbite component
+    - Implement base styling with bold borders
+    - Add variant styles (default, elevated, bordered)
+    - Implement padding variations (none, sm, md, lg)
+    - Add slot for card content
+    - _Requirements: 3.2_
+  - [x] 5.2 Create Card Storybook stories
+    - Create `src/stories/base/Card.stories.ts`
+    - Add stories for all variants
+    - Add stories showing different padding options
+    - Add example with nested content
+    - _Requirements: 8.2, 8.4_
+
+- [x] 6. Create Form base components
+  - [x] 6.1 Implement form components
+    - Create `src/lib/frontend/components/base/form/`
+    - Use the same file and component names as Flowbite form components do
+    - Use Flowbite corresponding components and customize it
+    - Implement base styling with bold borders
+    - Add focus and active states with bold ring (3px minimum) if Flowbite components have it
+    - Implement passing all Flowbite component props
+    - Implement error state styling
+    - Implement success state styling
+    - Add disabled state styling
+    - _Requirements: 3.3, 4.3, 6.2_
+  - [x] 6.2 Create corresponding Storybook stories
+    - Create `src/stories/base/form/`
+    - Add stories for different input types (text, email, password)
+    - Add stories for error state
+    - Add stories for disabled state
+    - Add story showing focus state
+    - _Requirements: 8.2, 8.4_
+
+- [x] 7. Create Typography base components
+  - [x] 7.1 Implement Typography components (P, Blockquote, Heading, HR, Image, Link, List)
+    - Create `src/lib/frontend/components/base/typography/` directory
+    - Use the same file and component names as Flowbite form components do
+    - Pass the same props as Flowbite components do
+    - Use the same variants as Flowbite components do
+    - _Requirements: 3.4, 4.4_
+  - [x] 7.2 Create Typography Storybook stories
+    - Create `src/stories/base/typography/` directory
+    - Add stories for all typography components
+    - Add stories for all sizes, variants and etc
+    - Add examples with different content (text, icons)
+    - _Requirements: 8.2, 8.4_
+
+- [x] 8. Create Modal base component
+  - [x] 8.1 Implement Modal component
+    - Create `src/lib/frontend/components/base/Modal.svelte`
+    - Use Flowbite corresponding component and customize it
+    - Define all flowbite props interface (open, title, size, class and etc.)
+    - This component should be a proxy to Flowbite original component but having customnized design
+    - _Requirements: 3.5, 6.3_
+  - [x] 8.2 Create Modal Storybook stories
+    - Create `src/stories/base/Modal.stories.ts`
+    - Add stories for all sizes
+    - Add story with header, body, and footer content and etc
+    - Add story demonstrating keyboard interaction
+    - _Requirements: 8.2, 8.4_
+
+- [x] 9. Create Flowbite component wrappers
+  - [x] 9.1 Identify and document Flowbite components needing wrappers
+    - Review existing Flowbite Svelte components used in the project
+    - Document which components need custom styling wrappers
+    - Create wrapper strategy documentation
+    - _Requirements: 7.4_
+  - [x] 9.2 Implement Dropdown wrapper
+    - Create `src/lib/frontend/components/wrappers/BrutalDropdown.svelte`
+    - Import Flowbite Dropdown component
+    - Apply neo-brutalist styling via class prop
+    - Ensure theme switching works correctly
+    - Test compatibility with Flowbite API
+    - _Requirements: 7.1, 7.2, 7.3, 7.5_
+  - [x] 9.3 Implement Navbar wrapper
+    - Create `src/lib/frontend/components/wrappers/BrutalNavbar.svelte`
+    - Import Flowbite Navbar component
+    - Apply neo-brutalist styling
+    - Ensure theme compatibility
+    - _Requirements: 7.1, 7.2, 7.3, 7.5_
+  - [x] 9.4 Create wrapper component stories
+    - Create stories for each wrapper component
+    - Document wrapper usage patterns
+    - Show examples of wrapped vs unwrapped components
+    - _Requirements: 8.2, 8.4_
