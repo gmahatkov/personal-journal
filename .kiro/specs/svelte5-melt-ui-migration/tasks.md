@@ -42,13 +42,13 @@
   - Run TypeScript check and verify no errors
   - _Requirements: 8.1, 8.2, 8.4_
 
-- [ ] 2. Migrate core infrastructure
+- [x] 2. Migrate core infrastructure
   - Update stores for Svelte 5 compatibility
   - Migrate Svelte actions to Svelte 5
   - Update utility functions
   - _Requirements: 7.1, 7.2, 7.3, 7.4, 7.5_
 
-- [ ] 2.1 Verify theme store compatibility
+- [x] 2.1 Verify theme store compatibility
   - Test theme store works with Svelte 5
   - Verify $ prefix subscription works in Svelte 5 components
   - Test toggle functionality
@@ -59,7 +59,7 @@
   - **Property 7: Store reactivity**
   - **Validates: Requirements 7.3**
 
-- [ ] 2.3 Migrate trapIntersection action
+- [x] 2.3 Migrate trapIntersection action
   - Update src/lib/frontend/actions/trapIntersection.ts to Svelte 5 syntax
   - Ensure action works with Svelte 5 components
   - _Requirements: 1.2, 1.3_
